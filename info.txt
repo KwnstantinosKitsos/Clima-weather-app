@@ -1,0 +1,40 @@
+
+// 1. COLORS
+
+- Light Mode
+    -- Main App Background (body): #EAEAEA
+    -- Sections #D9D9D9
+    -- Clima logo circle text : #000000 , opacity: 50%
+    -- Units : #D9D9D9
+    -- Hourly forecast: #868686, apearanse: 20%
+    -- Hourly forecast-days: #000000 
+
+- Dark Mode
+    -- Main App Background (body): #212529
+    -- Sections : #11141A
+    -- Clima logo circle text : #FFFFFF , opacity: 50%
+    -- Units : #40454F , opacity: 75%
+    -- Hourly forecast: #868686, apearanse: 20%
+    -- Hourly forecast-days: #868686, apearanse: 20%
+
+
+
+// 2. FONTS (self-hosting)
+
+- Google webfonts helper (League Spartan)
+
+
+
+// 3. Weather Icons https://freesvgicons.com/search?q=weather
+
+- Clear / Sunny ☀️
+- Clear Night 🌙
+- Partly Cloudy ⛅
+- Cloudy ☁️
+- Rain 🌧️
+- Light Rain / Drizzle 🌦️
+- Thunderstorm ⛈️
+- Snow ❄️
+
+
+

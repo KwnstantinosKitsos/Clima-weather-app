@@ -1,0 +1,90 @@
+:root{
+    --LM-background: hsl(0, 0%, 92%);
+    --LM-sections-units: hsl(0, 0%, 85%);
+    --LM-logo-circle-text: hsla(0, 0%, 0%, 0.5);
+    --LM-hourly-forecast: hsla(0, 0%, 53%, 0.2);
+
+    --DM-background: hsl(210, 11%, 15%);
+    --DM-sections: hsl(220, 21%, 8%);
+    --DM-logo-circle-text: hsla(0, 0%, 100%, 0.5);
+    --DM-units: hsl(220, 10%, 28%);
+    --DM-hourly-forecast: hsla(0, 0%, 53%, 0,2);
+    --DM-hourly-forecast-days: hsla(0, 0%, 53%, 0,2);
+}
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+*{
+    margin: 0;
+}
+
+body{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 500;
+}
+.nav{
+     border: 1px solid black;
+    margin: 5px;
+}
+
+.hero{
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.current_card{
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.current_weather{
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.current_conditions{
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.current_condition{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.daily_card{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.daily_forecast{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.daily_day{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.hourly_card{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.hourly_header{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.hourly_hours{
+    border: 1px solid;
+    margin: 5px;
+}
+
+.hourly_hour{
+    border: 1px solid;
+    margin: 5px;
+}

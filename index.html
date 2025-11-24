@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima.</title>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+  
+    <header>
+        <div class="nav">   
+            <a href="/">
+                <h1 class="logo">Clima.</h1>
+            </a>
+
+            <select name="units" id="units">
+                <option value="">Units</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+         <section class="hero">
+            <div class="search">
+                <input class="search_textbox" type="text" name="search" id="search">
+                <button class="search_btn" type="submit">Search</button>
+            </div>
+        </section>
+
+        <section class="current_card">
+            <div class="current_weather">
+                <div class="current_left_block">
+                    <div class="current_location">
+                        <img src="assets/icons/light_mode/locationL.svg" width="20px" alt="location icon">
+                        <span class="current_city">Athens, Greece</span>
+                    </div>
+                    <div class="current_temp">13°</div>
+                </div>
+            
+                <div class="current_right_block">
+                    <div class="current_date">Saturday - 10 Feb</div>
+
+                    <div class="current_icon">
+                        <img src="assets/icons/light_mode/sunnyL.svg" alt="Weather condition icon" width="30px">
+                        <div class="current_text">Sunny</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="current_conditions">
+
+                <div class="current_condition">
+                    <p class="current_condition-title">Feels Like</p>
+                    <p id="feelsLike" class="current_condition-value">18°</p>
+                </div>
+
+                <div class="current_condition">
+                    <p class="current_condition-title">Humidity</p>
+                    <p id="humidity" class="current_condition-value">44%</p>
+                </div>
+
+                <div class="current_condition">
+                    <p class="current_condition-title">Wind</p>
+                    <p id="wind" class="current_condition-value">0 km/h</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="daily_card">
+            <h2 class="section_title daily_title">Daily Forecast</h2>
+            
+            <div class="daily_forecast">
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+
+                <div class="daily_day">
+                    <p class="daily_day-title">Tue</p>
+                    <img src="assets/icons/light_mode/drizzleL.svg" width="20px">
+                    <div class="daily_day-temps">
+                        <p class="daily_day-high">20°</p>
+                        <p class="daily_day-low">13°</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="hourly_card">
+            <div class="hourly_header">
+                <h2 class="section_title hourly_title">Hourly Forecast</h2>
+                <select name="hourly-day" id="hourlyDay">
+                    <option value="">Tuesday</option>
+                </select> 
+            </div>
+            <div class="hourly_hours">
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+
+                <div class="hourly_hour">
+                    <img class="hourly_hour-icon" src="assets/icons/light_mode/rainL.svg" width="40" height="40" alt="Weather icon">
+                    <p class="hourly_hour-time">3PM</p>
+                    <p class="hourly_hour-temp">20°</p>
+                </div>
+            </div>
+            
+            <div class="hourly_forecast">
+
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
