@@ -1,10 +1,14 @@
+/* RESET VALUES */
+
 :root{
     --LM-background: hsl(0, 0%, 92%);
+    --LM-c-text : hsl(0, 0%, 100%);
     --LM-sections-units: hsl(0, 0%, 85%);
     --LM-logo-circle-text: hsla(0, 0%, 0%, 0.5);
     --LM-hourly-forecast: hsla(0, 0%, 53%, 0.2);
 
     --DM-background: hsl(210, 11%, 15%);
+     --LM-c-text : hsl(0, 0%, 0%);
     --DM-sections: hsl(220, 21%, 8%);
     --DM-logo-circle-text: hsla(0, 0%, 100%, 0.5);
     --DM-units: hsl(220, 10%, 28%);
@@ -20,74 +24,40 @@
     margin: 0;
 }
 
+
+/* BASE ELEMENT STYLES */
+
 body{
     font-family: 'League Spartan', sans-serif;
     font-weight: 500;
-}
-.nav{
-     border: 1px solid black;
-    margin: 5px;
+    background-color: var(--LM-background);
+    color: var(--LM-c-text); 
 }
 
-.hero{
-    border: 1px solid black;
-    margin: 5px;
+/* PAGE LAYOUT */
+
+.wrapper{
+    display: grid;
+    grid-template-columns: minmax(16px, 1fr) minmax(0, 1100px) minmax(16px, 1fr);
 }
 
-.current_card{
-    border: 1px solid black;
-    margin: 5px;
+ .wrapper > * {
+        grid-column: 2;
+    }
+
+
+
+
+/* MEDIA QUERIS */
+
+@media (min-width: 768px){
+    .wrapper{
+        grid-template-columns: minmax(24px, 1fr) minmax(0, 1100px) minmax(24px, 1fr);;
+    }
 }
 
-.current_weather{
-    border: 1px solid black;
-    margin: 5px;
+@media (min-width: 1200px){
+    .wrapper{
+        grid-template-columns: minmax(32px, 1fr) minmax(0, 1100) minmax(32px, 1fr);
+    }
 }
-
-.current_conditions{
-    border: 1px solid black;
-    margin: 5px;
-}
-
-.current_condition{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.daily_card{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.daily_forecast{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.daily_day{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.hourly_card{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.hourly_header{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.hourly_hours{
-    border: 1px solid;
-    margin: 5px;
-}
-
-.hourly_hour{
-    border: 1px solid;
-    margin: 5px;
-}
-
-
-/*Initial UI branch commit */
