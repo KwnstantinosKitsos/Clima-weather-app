@@ -10,14 +10,18 @@
 </head>
 <body>
   <div class=" grid_container wrapper">
-    <header  class="">
-        <a href="/">
-            <span class="logo">Clima.</span>
+
+    <header class="header">
+        <a class="header_homeLink" href="/">
+            <img class="header_logo" src="assets/icons/light_mode/logo.svg">
         </a>
 
-        <select name="units" id="units">
-            <option value="">Units</option>
-        </select>
+        <div class="header_settings">
+            <img class="header_settingIcon" src="assets/icons/light_mode/settingsL.svg" width="17px">
+            <select class="header_dropDown" name="units" id="units">
+                <option value="">Units</option>
+            </select>
+        </div>
     </header>
 
     <main>
