@@ -3,6 +3,7 @@
 :root{
     --LM-background: hsl(0, 0%, 92%);
     --LM-c-text : hsl(0, 0%, 100%);
+    --LM-c-searchBar : hsla(0, 0%, 85%, 0.842);
     --LM-sections-units: hsl(0, 0%, 85%);
     --LM-logo-circle-text: hsla(0, 0%, 0%, 0.5);
     --LM-hourly-forecast: hsla(0, 0%, 53%, 0.2);
@@ -36,19 +37,17 @@ body{
 
 /* COMPONENTS */
 
+
+/* Header */
 .header{
-    /* border: 1px solid; */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
-    /* padding-block-start: 16px; */
 }
-
 .header_logo{
     width: 88px;
     height: auto;
-    
 }
 .header_settings{
     display: flex;
@@ -69,7 +68,7 @@ body{
     font-size: 14px;
 }
 
-/* Pro-grade Enhancements */
+/* Smooth transition  */
 .header_settings,
 .header_dropDown,
 .header_logo {
@@ -77,13 +76,65 @@ body{
 }
 
 
+/* Main */
+.main{
+    margin-top: 20px;
+}
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.search_textbox{
+    border: none;
+    border-radius: 200px;
+    background-color: var(--LM-c-searchBar);
+    width: 340px;
+    height: 40px;
+    padding: 16px 35px;
+}
+.search_textbox:focus, .search_textbox:hover {
+    outline: 1px solid hsla(0, 0%, 45%, 0.5);
+}
+.search_btn{
+    border: none;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 0%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.search_label{
+    display: none;
+}
+.search_icon {
+    filter: invert(1);
+    width: 27px;
+    height: 27px;
+}
+.search_btn:active{
+    background-color: hsla(0, 0%, 0%, 0.8);
+    transform: scale(0.95);
+}
 
 
-/* PAGE LAYOUT */
+.current_card{
+    border: 1px solid;
+}
+
+
+
+
+/* GRID PAGE LAYOUT */
 
 .wrapper{
     display: grid;
-    grid-template-columns: minmax(16px, 1fr) minmax(0, 1100px) minmax(16px, 1fr);
+    grid-template-columns: minmax(16px, 1fr) minmax(0, 1100px)minmax(16px, 1fr);
 }
 
  .wrapper > * {
@@ -108,6 +159,36 @@ body{
     .header_dropDown{
         font-size: 16px;
     }
+    .search_textbox{
+        width: 400px;
+        height: 45px;
+    }
+    .search_icon{
+        display: none;
+    }
+    .search_label{
+        display: inline;
+        color: hsl(0, 0%, 100%);
+    }
+    .search_btn{
+        width: 120px;
+        border-radius: 200px;
+        height: 45px;
+    }
+
+    .search_btn::before {
+      content: "";
+      display: inline-block;
+      height: 2px;
+      width: 0;
+      background-color: #fff;
+      margin-right: 10px;
+      transition: width .42s cubic-bezier(0.25,0.8,0.25,1);
+    }
+
+  .search_btn:hover::before {
+      width: 1rem;  
+  }
 }
 
 @media (min-width: 1216px){
@@ -123,5 +204,13 @@ body{
     }
     .header_dropDown{
         font-size: 18px;
+    }
+    .search_textbox{
+        width: 480px;
+        height: 50px;
+    }
+    .search_btn{
+        width: 120px;
+        height: 50px;
     }
 }
