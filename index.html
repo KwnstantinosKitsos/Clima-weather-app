@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,18 +12,26 @@
     <div class="grid_container wrapper">
       <header class="header">
         <a class="header_homeLink" href="/">
-          <img class="header_logo" src="assets/icons/light_mode/logo.svg" />
+          <img
+            class="header_logo header_logo--light"
+            src="assets/icons/light_mode/logo.svg"
+          />
+          <img
+            class="header_logo header_logo--dark"
+            src="assets/icons/dark_mode/logoD.svg"
+          />
         </a>
 
-        <div class="header_settings">
-          <img
-            class="header_settingIcon"
-            src="assets/icons/light_mode/settingsL.svg"
-            width="17px"
-          />
-          <select class="header_dropDown" name="units" id="units">
-            <option value="">Units</option>
-          </select>
+        <div class="switch_container">
+          <label for="switch" class="toggle">
+            <input type="checkbox" class="input" id="switch" />
+            <div class="icon-switch icon-moon">
+              <img class="icon-svg" src="assets/icons/light_mode/moon.svg" />
+            </div>
+            <div class="icon-switch icon-sun">
+              <img class="icon-svg" src="assets/icons/light_mode/sunnyL.svg" />
+            </div>
+          </label>
         </div>
       </header>
 
@@ -39,7 +47,7 @@
             />
             <button class="search_btn" type="submit">
               <img
-                class="search_icon"
+                class="search_icon icon"
                 src="assets/icons/light_mode/search.svg"
               />
               <span class="search_label">Search</span>
@@ -52,6 +60,7 @@
             <div class="current_location">
               <div class="current_displayCity">
                 <img
+                  class="icon"
                   src="assets/icons/dark_mode/locationD.svg"
                   alt="location icon"
                 />
@@ -67,6 +76,7 @@
 
               <div class="current_iconText">
                 <img
+                  class="icon"
                   src="assets/icons/light_mode/sunnyL.svg"
                   alt="Weather condition icon"
                 />
@@ -104,7 +114,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -117,7 +127,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -130,7 +140,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -143,7 +153,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -156,7 +166,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -169,7 +179,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -182,7 +192,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -195,7 +205,7 @@
             <div class="daily_day">
               <p class="daily_day-title">Tue</p>
               <img
-                class="daily_day-icon"
+                class="daily_day-icon icon"
                 src="assets/icons/light_mode/drizzleL.svg"
                 width="20px"
               />
@@ -217,7 +227,7 @@
           <div class="hourly_hours">
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -229,7 +239,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -241,7 +251,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -253,7 +263,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -265,7 +275,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -277,7 +287,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -289,7 +299,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
@@ -301,7 +311,7 @@
 
             <div class="hourly_hour">
               <img
-                class="hourly_hour-icon"
+                class="hourly_hour-icon icon"
                 src="assets/icons/light_mode/rainL.svg"
                 width="40"
                 height="40"
