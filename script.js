@@ -1,6 +1,40 @@
-// Acces the DOM
+// Access the DOM
 const themeSwitch = document.getElementById('switch');
 const root = document.documentElement;
+
+const weatherMap = {
+  0: { icon: 'sunnyL.svg', description: 'Clear Sky' },
+
+  1: { icon: 'sunnyL.svg', description: 'Mainly clear' },
+  2: { icon: 'partlyCloudy.svg', description: 'Partly cloudy' },
+  3: { icon: 'cloudL.svg', description: 'Overcast' },
+
+  45: { icon: 'fogL.svg', description: 'Fog' },
+  48: { icon: 'fogL.svg', description: 'Depositing rime fog' },
+
+  51: { icon: 'drizzleL.svg', description: 'Light drizzle' },
+  53: { icon: 'drizzleL.svg', description: 'Moderate drizzle' },
+  55: { icon: 'drizzleL.svg', description: 'Dense drizzle"' },
+
+  61: { icon: 'rainL.svg', description: 'Slight rain' },
+  63: { icon: 'rainL.svg', description: 'Moderate rain' },
+  65: { icon: 'rainL.svg', description: 'Heavy rain' },
+
+  71: { icon: 'snowL.svg', description: 'Slight snow' },
+  73: { icon: 'snowL.svg', description: 'Moderate snow' },
+  75: { icon: 'snowL.svg', description: 'Heavy snow' },
+
+  80: { icon: 'rainL.svg', description: 'Slight Rain showers' },
+  81: { icon: 'rainL.svg', description: 'Moderate Rain showers' },
+  82: { icon: 'rainL.svg', description: 'Violent Rain showers' },
+
+  85: { icon: 'snowL.svg', description: 'Slight Snow shower' },
+  86: { icon: 'snowL.svg', description: 'Heavy snow shower' },
+
+  95: { icon: 'thunderstormL.svg', description: 'Thunderstorm' },
+  96: { icon: 'thunderstormL.svg', description: 'Thunderstorm w/ hail' },
+  99: { icon: 'thunderstormL.svg', description: 'Severe thunderstorm' },
+};
 
 // 1. Check if there is a saved theme
 const savedTheme = localStorage.getItem('theme');
@@ -25,3 +59,114 @@ themeSwitch.addEventListener('change', () => {
     localStorage.setItem('theme', 'light');
   }
 });
+
+// Get lan/lon
+async function getGeocodingData() {
+  let search = 'Larisa';
+  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${search}&count=1&language=en&format=json`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log(result);
+
+    let lat = result.results[0].latitude;
+    let lon = result.results[0].longitude;
+
+    loadLocationData(result);
+    getWeatherData(lat, lon);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+getGeocodingData();
+
+//Get weatherData
+
+async function getWeatherData(lat, lon) {
+  let tempUnit = 'celsius';
+  let windUnit = 'kmh';
+  let precipitationUnit = 'mm';
+
+  //   if (toggleValue) {
+  //     tempUnit = 'fahrenheit';
+  //     windUnit = 'mph';
+  //     precipitationUnit = 'inch';
+  //   }
+
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code,wind_speed_10m&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,precipitation,wind_speed_10m`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log(result);
+
+    loadWeatherData(result);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+function loadLocationData(locationData) {
+  let cityName = locationData.results[0].name;
+  let countryName = locationData.results[0].country;
+
+  let date = new Date();
+  const dateOptions = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'short',
+  };
+  let formattedDate = date.toLocaleDateString('en-GB', dateOptions);
+
+  console.log(formattedDate);
+  console.log(`${cityName}, ${countryName}`);
+
+  const currCityCountry = document.querySelector('#currCityCountry');
+  const currDate = document.querySelector('#currDate');
+
+  currCityCountry.textContent = `${cityName}, ${countryName}`;
+  currDate.textContent = formattedDate;
+}
+
+function loadWeatherData(weather) {
+  const currTemp = document.querySelector('#currTemp');
+
+  let temp = Math.round(`${weather.current.apparent_temperature}`);
+  currTemp.textContent = `${temp}°`;
+
+  const currIcon = document.querySelector('.current_iconText img');
+  const currText = document.querySelector('.current_text');
+
+  const weatherCode = weather.current.weather_code;
+  const iconData = getIconByWeatherCode(weatherCode);
+
+  currIcon.src = `assets/icons/light_mode/${iconData.icon}`;
+  currText.textContent = iconData.description;
+
+  console.log(weatherCode);
+
+  const feelsLike = document.querySelector('#feelsLike');
+  const humidity = document.querySelector('#humidity');
+  const wind = document.querySelector('#wind');
+  const percipitetion = document.querySelector('#percipitetion');
+
+  feelsLike.textContent = weather.current.apparent_temperature;
+  humidity.textContent = weather.current.relative_humidity_2m;
+
+  wind.textContent = `${weather.current.wind_speed_10m} ${weather.current_units.wind_speed_10m}`;
+  percipitetion.textContent = `${weather.current.precipitation} ${weather.current_units.precipitation}`;
+}
+
+function getIconByWeatherCode(weatherCode) {
+  if (weatherMap[weatherCode]) {
+    return weatherMap[weatherCode];
+  } else {
+    return { icon: 'unknown.svg', description: 'Unknown' };
+  }
+}

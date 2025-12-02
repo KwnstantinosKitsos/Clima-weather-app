@@ -65,14 +65,16 @@
                   alt="location icon"
                 />
 
-                <span class="current_city">Athens, Greece</span>
+                <div id="currCityCountry" class="current_city">
+                  Athens, Greece
+                </div>
               </div>
 
-              <div class="current_date">Saturday - 10 Feb</div>
+              <div id="currDate" class="current_date">Saturday - 10 Feb</div>
             </div>
 
             <div class="current_middle">
-              <div class="current_temp">13°</div>
+              <div id="currTemp" class="current_temp">13°</div>
 
               <div class="current_iconText">
                 <img
@@ -88,22 +90,26 @@
           <div class="current_conditions">
             <div class="current_condition">
               <p class="current_condition-title">Feels Like</p>
-              <p id="feelsLike" class="current_condition-value">18°</p>
+              <p class="current_condition-value">
+                <span id="feelsLike">18</span>°
+              </p>
             </div>
 
             <div class="current_condition">
               <p class="current_condition-title">Humidity</p>
-              <p id="humidity" class="current_condition-value">44%</p>
+              <p class="current_condition-value">
+                <span id="humidity">44</span>%
+              </p>
             </div>
 
             <div class="current_condition">
               <p class="current_condition-title">Wind</p>
-              <p id="wind" class="current_condition-value">0 km/h</p>
+              <p id="wind" class="current_condition-value"></p>
             </div>
 
             <div class="current_condition">
               <p class="current_condition-title">Percipitetion</p>
-              <p id="wind" class="current_condition-value">0 mm</p>
+              <p id="percipitetion" class="current_condition-value"></p>
             </div>
           </div>
         </section>
