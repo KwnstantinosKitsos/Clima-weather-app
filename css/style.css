@@ -424,6 +424,23 @@ body {
 }
 
 /* MEDIA QUERY'S */
+@media (min-width: 560px) and (max-width: 767px) {
+  .daily_card {
+    width: 100%;
+  }
+
+  .daily_forecast {
+    width: 100%;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .daily_day {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
+  }
+}
 
 @media (min-width: 768px) {
   .wrapper {
