@@ -83,6 +83,10 @@
   box-sizing: border-box;
 }
 
+.hidden {
+  display: none;
+}
+
 * {
   margin: 0;
 }

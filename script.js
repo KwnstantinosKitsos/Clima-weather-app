@@ -94,6 +94,12 @@ async function getGeocodingData(search) {
     const result = await response.json();
     console.log(result);
 
+    if (!result.results || result.results.length === 0) {
+      alert('Location NOT found!');
+    }
+    const UI = document.querySelector('#weatherUI');
+    UI.classList.remove('hidden');
+
     let lat = result.results[0].latitude;
     let lon = result.results[0].longitude;
 
@@ -281,3 +287,9 @@ function loadHourlyForecast(hour) {
     hourlyForecast.appendChild(hourElement);
   }
 }
+
+// S  O  S
+
+// git add .
+//git commit -m 'Display weather UI only after successful location search'
+//git push
