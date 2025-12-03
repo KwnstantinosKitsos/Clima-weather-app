@@ -60,9 +60,31 @@ themeSwitch.addEventListener('change', () => {
   }
 });
 
+const searchInput = document.querySelector('#search');
+const searchBtn = document.querySelector('.search_btn');
+
+searchBtn.addEventListener('click', () => {
+  const input = searchInput.value.trim();
+
+  if (input === '') {
+    return;
+  }
+  getGeocodingData(input);
+});
+
+searchInput.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    const input = searchInput.value.trim();
+    if (input === '') {
+      return;
+    }
+    getGeocodingData(input);
+  }
+});
+
 // Get lan/lon
-async function getGeocodingData() {
-  let search = 'Larisa';
+async function getGeocodingData(search) {
+  // let search = 'Larisa';
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${search}&count=1&language=en&format=json`;
   try {
     const response = await fetch(url);
@@ -86,9 +108,11 @@ getGeocodingData();
 //Get weatherData
 
 async function getWeatherData(lat, lon) {
-  let tempUnit = 'celsius';
-  let windUnit = 'kmh';
-  let precipitationUnit = 'mm';
+  // Toggle C -> F
+
+  // let tempUnit = 'celsius';
+  // let windUnit = 'kmh';
+  // let precipitationUnit = 'mm';
 
   //   if (toggleValue) {
   //     tempUnit = 'fahrenheit';
@@ -134,6 +158,8 @@ function loadLocationData(locationData) {
   currDate.textContent = formattedDate;
 }
 
+// CURRENT
+
 function loadWeatherData(weather) {
   const currTemp = document.querySelector('#currTemp');
 
@@ -161,7 +187,9 @@ function loadWeatherData(weather) {
 
   wind.textContent = `${weather.current.wind_speed_10m} ${weather.current_units.wind_speed_10m}`;
   percipitetion.textContent = `${weather.current.precipitation} ${weather.current_units.precipitation}`;
+
   loadDailyForecast(weather.daily, iconData);
+  loadHourlyForecast(weather.hourly, iconData);
 }
 
 function getIconByWeatherCode(weatherCode) {
@@ -171,6 +199,8 @@ function getIconByWeatherCode(weatherCode) {
     return { icon: 'unknown.svg', description: 'Unknown' };
   }
 }
+
+// DAILY
 
 function loadDailyForecast(daily, iconData) {
   const dailyForecast = document.querySelector('.daily_forecast');
@@ -206,5 +236,49 @@ function loadDailyForecast(daily, iconData) {
         `;
 
     dailyForecast.appendChild(dayElement);
+  }
+}
+
+function loadHourlyForecast(hour) {
+  const hourlyForecast = document.querySelector('.hourly_hours');
+
+  hourlyForecast.innerHTML = '';
+
+  const HOURS_TO_SHOW = 8;
+  const totalHours = hour.time.length;
+  const limit = Math.min(HOURS_TO_SHOW, totalHours);
+
+  for (let i = 0; i < limit; i++) {
+    // 1. Format hour label
+    const date = new Date(hour.time[i]);
+    const hourLabel = date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      hour12: true,
+    });
+
+    // 2. Temperature
+    const temp = Math.round(hour.temperature_2m[i]);
+
+    // 3. Weather code → icon
+    const code = hour.weather_code[i];
+    const iconHourData = getIconByWeatherCode(code);
+
+    // 4. Create the hourly card element
+    const hourElement = document.createElement('div');
+    hourElement.classList.add('hourly_hour');
+
+    hourElement.innerHTML = `
+      <img
+        class="hourly_hour-icon icon"
+        src="assets/icons/light_mode/${iconHourData.icon}"
+        alt="${iconHourData.description}"
+        width="40"
+        height="40"
+      />
+      <p class="hourly_hour-time">${hourLabel}</p>
+      <p class="hourly_hour-temp">${temp}°</p>
+    `;
+
+    hourlyForecast.appendChild(hourElement);
   }
 }
