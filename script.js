@@ -103,7 +103,6 @@ async function getGeocodingData(search) {
     console.error(error.message);
   }
 }
-getGeocodingData();
 
 //Get weatherData
 
