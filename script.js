@@ -161,6 +161,7 @@ function loadWeatherData(weather) {
 
   wind.textContent = `${weather.current.wind_speed_10m} ${weather.current_units.wind_speed_10m}`;
   percipitetion.textContent = `${weather.current.precipitation} ${weather.current_units.precipitation}`;
+  loadDailyForecast(weather.daily, iconData);
 }
 
 function getIconByWeatherCode(weatherCode) {
@@ -168,5 +169,42 @@ function getIconByWeatherCode(weatherCode) {
     return weatherMap[weatherCode];
   } else {
     return { icon: 'unknown.svg', description: 'Unknown' };
+  }
+}
+
+function loadDailyForecast(daily, iconData) {
+  const dailyForecast = document.querySelector('.daily_forecast');
+
+  dailyForecast.innerHTML = '';
+
+  const daysCount = daily.time.length;
+  console.log(daysCount);
+  console.log(daily);
+
+  for (let i = 1; i < daysCount; i++) {
+    const date = new Date(daily.time[i]);
+    const nameDay = date.toLocaleDateString('en-GB', { weekday: 'short' });
+
+    const maxTemp = Math.round(daily.temperature_2m_max[i]);
+    const minTemp = Math.round(daily.temperature_2m_min[i]);
+
+    //Create the Element
+    const dayElement = document.createElement('div');
+    dayElement.className = 'daily_day';
+
+    dayElement.innerHTML = ` 
+            <p class="daily_day-title">${nameDay}</p>   
+            <img
+                class="daily_day-icon icon"
+                src="assets/icons/light_mode/${iconData.icon}"
+                width="20px"   
+            />
+            <div class="daily_day-temps">
+              <p class="daily_day-high"><span>${maxTemp}</span>°</p>
+              <p class="daily_day-low"><span>${minTemp}</span>°</p>
+            </div>
+        `;
+
+    dailyForecast.appendChild(dayElement);
   }
 }
