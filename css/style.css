@@ -153,6 +153,17 @@ body {
   transition-delay: 90ms;
   transform: scale(1) rotate(360deg);
 }
+.hide {
+  display: none;
+}
+.notFound {
+  color: var(--color-text);
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
 
 /* Smooth transition  */
 .header_settings,
@@ -648,4 +659,11 @@ body {
     width: 120px;
     height: 53px;
   }
+  #weatherUI {
+    display: contents;
+  }
+}
+
+#weatherUI.hidden {
+  display: none;
 }

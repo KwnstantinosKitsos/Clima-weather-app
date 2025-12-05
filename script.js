@@ -45,11 +45,12 @@ if (savedTheme === 'dark') {
   root.setAttribute('data-theme', 'light');
   themeSwitch.checked = false;
 } else {
+  //Default Theme: light
   root.setAttribute('data-theme', 'light');
   themeSwitch.checked = false;
 }
 
-// 2. Listen the checkebox of toggle and change the theme
+// 2. Listen the checkebox of the toggle and change the theme
 themeSwitch.addEventListener('change', () => {
   if (themeSwitch.checked) {
     root.setAttribute('data-theme', 'dark');
@@ -60,8 +61,10 @@ themeSwitch.addEventListener('change', () => {
   }
 });
 
-const searchInput = document.querySelector('#search');
+// Event Listeners (Button + Input)
+
 const searchBtn = document.querySelector('.search_btn');
+const searchInput = document.querySelector('#search');
 
 searchBtn.addEventListener('click', () => {
   const input = searchInput.value.trim();
@@ -84,6 +87,8 @@ searchInput.addEventListener('keyup', (e) => {
 
 // Get lan/lon
 async function getGeocodingData(search) {
+  const notFound = document.querySelector('.notFound');
+  const UI = document.querySelector('#weatherUI');
   // let search = 'Larisa';
   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${search}&count=1&language=en&format=json`;
   try {
@@ -95,9 +100,15 @@ async function getGeocodingData(search) {
     console.log(result);
 
     if (!result.results || result.results.length === 0) {
-      alert('Location NOT found!');
+      // alert('Location NOT found!');
+      notFound.textContent = `The location ${search} was not Found...`;
+      notFound.classList.remove('hide');
+      UI.classList.add('hidden');
+      return;
     }
-    const UI = document.querySelector('#weatherUI');
+    notFound.classList.add('hide');
+    notFound.textContent = '';
+
     UI.classList.remove('hidden');
 
     let lat = result.results[0].latitude;
@@ -197,6 +208,7 @@ function loadWeatherData(weather) {
   loadHourlyForecast(weather.hourly, iconData);
 }
 
+//Weather_code resolver
 function getIconByWeatherCode(weatherCode) {
   if (weatherMap[weatherCode]) {
     return weatherMap[weatherCode];
@@ -206,7 +218,6 @@ function getIconByWeatherCode(weatherCode) {
 }
 
 // DAILY
-
 function loadDailyForecast(daily, iconData) {
   const dailyForecast = document.querySelector('.daily_forecast');
 
@@ -223,6 +234,8 @@ function loadDailyForecast(daily, iconData) {
     const maxTemp = Math.round(daily.temperature_2m_max[i]);
     const minTemp = Math.round(daily.temperature_2m_min[i]);
 
+    const dayCode = daily.weather_code[i];
+    const dayIcon = getIconByWeatherCode(dayCode);
     //Create the Element
     const dayElement = document.createElement('div');
     dayElement.className = 'daily_day';
@@ -231,8 +244,8 @@ function loadDailyForecast(daily, iconData) {
             <p class="daily_day-title">${nameDay}</p>   
             <img
                 class="daily_day-icon icon"
-                src="assets/icons/light_mode/${iconData.icon}"
-                width="20px"   
+                src="assets/icons/light_mode/${dayIcon.icon}"
+                width="20px" 
             />
             <div class="daily_day-temps">
               <p class="daily_day-high"><span>${maxTemp}</span>°</p>
@@ -244,6 +257,7 @@ function loadDailyForecast(daily, iconData) {
   }
 }
 
+// Ηourly
 function loadHourlyForecast(hour) {
   const hourlyForecast = document.querySelector('.hourly_hours');
 
@@ -287,9 +301,3 @@ function loadHourlyForecast(hour) {
     hourlyForecast.appendChild(hourElement);
   }
 }
-
-// S  O  S
-
-// git add .
-//git commit -m 'Display weather UI only after successful location search'
-//git push
