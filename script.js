@@ -73,6 +73,7 @@ searchBtn.addEventListener('click', () => {
     return;
   }
   getGeocodingData(input);
+  searchInput.value = '';
 });
 
 searchInput.addEventListener('keyup', (event) => {
@@ -82,6 +83,7 @@ searchInput.addEventListener('keyup', (event) => {
       return;
     }
     getGeocodingData(input);
+    searchInput.value = '';
   }
 });
 
