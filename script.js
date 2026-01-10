@@ -75,8 +75,8 @@ searchBtn.addEventListener('click', () => {
   getGeocodingData(input);
 });
 
-searchInput.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
+searchInput.addEventListener('keyup', (event) => {
+  if (event.key === 'Enter') {
     const input = searchInput.value.trim();
     if (input === '') {
       return;
@@ -114,8 +114,8 @@ async function getGeocodingData(search) {
     let lat = result.results[0].latitude;
     let lon = result.results[0].longitude;
 
-    loadLocationData(result);
-    getWeatherData(lat, lon);
+    // loadLocationData(result);
+    getWeatherData(lat, lon, result);
   } catch (error) {
     console.error(error.message);
   }
@@ -123,8 +123,8 @@ async function getGeocodingData(search) {
 
 //Get weatherData
 
-async function getWeatherData(lat, lon) {
-  // Toggle C -> F
+async function getWeatherData(lat, lon, locationData) {
+  // TODO: Toggle C -> F
 
   // let tempUnit = 'celsius';
   // let windUnit = 'kmh';
@@ -146,32 +146,45 @@ async function getWeatherData(lat, lon) {
     const result = await response.json();
     console.log(result);
 
+    loadLocationData(locationData, result);
     loadWeatherData(result);
   } catch (error) {
     console.error(error.message);
   }
 }
 
-function loadLocationData(locationData) {
+function loadLocationData(locationData, weatherData) {
   let cityName = locationData.results[0].name;
   let countryName = locationData.results[0].country;
 
-  let date = new Date();
+  const apiTimeStamp = weatherData.current.time;
+  let date = new Date(apiTimeStamp);
+  const cityTimeZone = weatherData.timezone;
+
   const dateOptions = {
     weekday: 'long',
     day: 'numeric',
     month: 'short',
+    timeZone: cityTimeZone,
   };
   let formattedDate = date.toLocaleDateString('en-GB', dateOptions);
+
+  const dateOfWeekOptions = {
+    weekday: 'long',
+    timeZone: cityTimeZone,
+  };
+  let dayOfWeek = date.toLocaleDateString('en-GB', dateOfWeekOptions);
 
   console.log(formattedDate);
   console.log(`${cityName}, ${countryName}`);
 
   const currCityCountry = document.querySelector('#currCityCountry');
   const currDate = document.querySelector('#currDate');
+  const hourlyDay = document.querySelector('.hourly_day');
 
   currCityCountry.textContent = `${cityName}, ${countryName}`;
   currDate.textContent = formattedDate;
+  hourlyDay.textContent = dayOfWeek;
 }
 
 // CURRENT
@@ -179,7 +192,7 @@ function loadLocationData(locationData) {
 function loadWeatherData(weather) {
   const currTemp = document.querySelector('#currTemp');
 
-  let temp = Math.round(`${weather.current.apparent_temperature}`);
+  let temp = Math.round(`${weather.current.temperature_2m}`);
   currTemp.textContent = `${temp}°`;
 
   const currIcon = document.querySelector('.current_iconText img');
@@ -196,13 +209,13 @@ function loadWeatherData(weather) {
   const feelsLike = document.querySelector('#feelsLike');
   const humidity = document.querySelector('#humidity');
   const wind = document.querySelector('#wind');
-  const percipitetion = document.querySelector('#percipitetion');
+  const precipitation = document.querySelector('#percipitetion');
 
   feelsLike.textContent = weather.current.apparent_temperature;
   humidity.textContent = weather.current.relative_humidity_2m;
 
   wind.textContent = `${weather.current.wind_speed_10m} ${weather.current_units.wind_speed_10m}`;
-  percipitetion.textContent = `${weather.current.precipitation} ${weather.current_units.precipitation}`;
+  precipitation.textContent = `${weather.current.precipitation} ${weather.current_units.precipitation}`;
 
   loadDailyForecast(weather.daily, iconData);
   loadHourlyForecast(weather.hourly, iconData);
@@ -236,6 +249,7 @@ function loadDailyForecast(daily, iconData) {
 
     const dayCode = daily.weather_code[i];
     const dayIcon = getIconByWeatherCode(dayCode);
+
     //Create the Element
     const dayElement = document.createElement('div');
     dayElement.className = 'daily_day';
